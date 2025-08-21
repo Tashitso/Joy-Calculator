@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happiness Predictor</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 400px; margin: 0 auto; padding: 20px; }
+    input { width: 100%; margin-bottom: 10px; }
+    button { width: 100%; padding: 10px; background: gold; color: black; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Happiness Predictor App</h2>
+  <p>Enter factors (0-10 scale for most; GDP ~10 for high, Health ~70 for expectancy):</p>
+  <input id="gdp" type="number" placeholder="GDP (e.g., 10.5)" step="0.1">
+  <input id="support" type="number" placeholder="Social Support (e.g., 1.5)" step="0.1">
+  <input id="health" type="number" placeholder="Health (e.g., 70)" step="1">
+  <input id="freedom" type="number" placeholder="Freedom (e.g., 0.8)" step="0.1">
+  <input id="generosity" type="number" placeholder="Generosity (e.g., 0.2)" step="0.1">
+  <input id="corruption" type="number" placeholder="Corruption (e.g., 0.3)" step="0.1">
+  <button onclick="predict()">Predict Happiness</button>
+  <p id="result"></p>
+
+  <script>
+    function predict() {
+      const gdp = parseFloat(document.getElementById('gdp').value) || 0;
+      const support = parseFloat(document.getElementById('support').value) || 0;
+      const health = parseFloat(document.getElementById('health').value) || 0;
+      const freedom = parseFloat(document.getElementById('freedom').value) || 0;
+      const generosity = parseFloat(document.getElementById('generosity').value) || 0;
+      const corruption = parseFloat(document.getElementById('corruption').value) || 0;
+
+      // Approximate LinearRegression from your model (adjust coefficients from model.coef_)
+      const pred = 1.5 + (0.8 * gdp) + (1.2 * support) + (0.05 * health) + (1.0 * freedom) + (0.5 * generosity) + (-0.3 * corruption);  # Tweak based on your fit
+      document.getElementById('result').innerHTML = `Predicted Happiness Score: ${pred.toFixed(2)} (out of 10)`;
+    }
+  </script>
+</body>
+</html>
